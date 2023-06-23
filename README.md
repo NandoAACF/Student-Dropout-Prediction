@@ -9,3 +9,5 @@
 - Naive Bayes
 - Perceptron
 - Support Vector Machine
+
+**Code explanation and insight from the code can be seen in the Presentation.pdf file**
