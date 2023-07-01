@@ -73,7 +73,13 @@ def show_insight_page():
 
     plt.title('Kelulusan siswa berdasarkan status beasiswa')
     st.pyplot(plt)
-    
+
+    st.text('Keterangan:' )
+    st.text('0 = Tidak menggunakan beasiswa')
+    st.text('1 = Menggunakan beasiswa')
+    st.caption('Tampak jelas bahwa lebih dari 85% mahasiswa yang menggunakan beasiswa berhasil lulus')
+    st.caption('Sebaliknya, mahasiswa yang tidak menggunakan beasiswa memiliki jumlah yang hampir sama antara yang lulus dan tidak lulus.')
+
 
 
 
@@ -94,6 +100,9 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan umur')
     st.pyplot(plt)
 
+    st.caption('Ya, tampak bahwa umur berpengaruh terhadap tingkat kelulusan mahasiswa.')
+    st.caption('Terlihat bahwa semakin tua umur mahasiswa, maka semakin sedikit pula persentase mahasiswa yang lulus.')
+
 
 
 
@@ -108,6 +117,10 @@ def show_insight_page():
 
     plt.title('Kelulusan siswa berdasarkan GDP')
     st.pyplot(plt)
+
+    st.caption('Tampak bahwa GDP tidak terlalu berpengaruh terhadap tingkat kelulusan mahasiswa.')
+    st.caption('Hal tersebut karena jumlah mahasiswa yang lulus dan tidak lulus pada setiap GDP hampir sama.')
+    st.caption('Namun, bila dicermati secara lebih detail, tampak bahwa GDP 1.79, 2.02, 3.51 memiliki persentase mahasiswa yang lulus lebih tinggi dibandingkan GDP yang lain')
 
 
 
@@ -130,6 +143,8 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan jumlah SKS semester 1')
     st.pyplot(plt)
 
+    st.caption('Tampak bahwa mahasiswa yang mengambil 1-4 SKS memiliki persentase kelulusan yang sangat kecil.')
+    st.caption('Sebaliknya, mahasiswa yang mengambil di atas 5 sks memiliki persentase kelulusan yang lebih besar.')
 
 
 
@@ -151,6 +166,10 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan jumlah SKS semester 2')
     st.pyplot(plt)
 
+    st.caption('Pola yang tampak masih sama seperti semester 1 di atas')
+    st.caption('Tampak bahwa mahasiswa yang mengambil 1-4 SKS memiliki persentase kelulusan yang sangat kecil.')
+    st.caption('Sebaliknya, mahasiswa yang mengambil di atas 5 sks memiliki persentase kelulusan yang lebih besar.')
+
 
 
 
@@ -166,6 +185,9 @@ def show_insight_page():
 
     st.pyplot(plt)
 
+    st.caption('Tampak bahwa persebaran IP mahasiswa di semester 1 ada di antara 10 - 16')
+    st.caption('Ada sekitar 600 mahasiswa yang mendapatkan IP 0')
+    st.caption('Hal tersebut mungkin terjadi jika mahasiswa tidak pernah mengikuti kelas pada mata kuliah yang sudah ia daftarkan.')
 
 
 
@@ -186,6 +208,10 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan IP semester 1')
     st.pyplot(plt)
 
+    st.caption('Tampak jelas bahwa semakin tinggi IP, maka semakin besar pula persentase mahasiswa yang lulus.')
+    st.caption('Mahasiswa yang mendapatkan IP 9.6-10.25 memiliki persentase kelulusan yang sangat kecil.')
+    st.caption('Hal ini menunjukkan bahwa IP memang berpengaruh terhadap kelulusan mahasiswa.')
+
     
 
 
@@ -201,6 +227,9 @@ def show_insight_page():
 
     st.pyplot(plt)
 
+    st.caption('Tampak bahwa persebaran IP mahasiswa di semester 2 ada di antara 10 - 17')
+    st.caption('Ada sekitar 800 mahasiswa yang mendapatkan IP 0')
+    st.caption('Distribusi ini masih mirip dengan distribusi IP pada semester 1.')
 
     
     
@@ -220,3 +249,5 @@ def show_insight_page():
 
     plt.title('Kelulusan siswa berdasarkan IP semester 2')
     st.pyplot(plt)
+
+    st.caption('Sama seperti semester 1, tampak jelas bahwa semakin tinggi IP, maka semakin besar pula persentase mahasiswa yang lulus.')
