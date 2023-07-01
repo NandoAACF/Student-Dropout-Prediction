@@ -44,5 +44,3 @@ def show_predict_page():
         if pred == 1:
             st.subheader(f'The student will graduate')
 
-show_predict_page()
-
