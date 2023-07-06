@@ -1,13 +1,17 @@
 # Student Dropout Prediction
 **Goal:** 
-- Modeling without ML Library
+- Modeling from **scratch** without ML Library
 - Data Augmentation using GAN
 - Feature Selection using ANOVA
+- Deploy Best Model into Web App
 
-**Model:**
+**Model from scratch:**
 - Logistic Regression
 - Naive Bayes
 - Perceptron
 - Support Vector Machine
 
-**Code explanation and insight from the code can be seen in the Presentation.pdf file**
+**Model from ML Library:**
+- Catboost Classifier (used in the web app)
+
+**Web App: https://student-dropout.streamlit.app/**
