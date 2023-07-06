@@ -11,17 +11,31 @@ data = load_model()
 
 def show_predict_page():
     st.title('Student Dropout Prediction')
-    st.write("""### We need some information to predict the student dropout""")
 
-    marital = (
-        1, 2, 3, 4, 5, 6
-    )
-    scholarship_status = (0, 1)
+    marital_status = st.selectbox('Marital Status', ('Single', 'Married', 'Widower', 'Divorced', 'Facto Union', 'Legally Separated'))
+    if marital_status == 'Single':
+        marital_status = 1
+    elif marital_status == 'Married':
+        marital_status = 2
+    elif marital_status == 'Widower':
+        marital_status = 3
+    elif marital_status == 'Divorced':
+        marital_status = 4
+    elif marital_status == 'Facto Union':
+        marital_status = 5
+    elif marital_status == 'Legally Separated':
+        marital_status = 6
 
-    marital_status = st.selectbox('Marital Status', marital)
     gdp = st.text_input('GDP')
-    age = st.text_input('Age when enroll')
-    scholarship = st.selectbox('Are you a scholarship holder?', scholarship_status)
+
+    age = st.select_slider('Age', options=[i for i in range(1, 100)])
+
+    scholarship = st.selectbox('Are you a scholarship holder?', ('No', 'Yes'))
+    if scholarship == 'No':
+        scholarship = 0
+    elif scholarship == 'Yes':
+        scholarship = 1
+
     credit1 = st.text_input('Number of curricular units credited in the 1st semester')
     enrolled1 = st.text_input('Number of curricular units enrolled in the 1st semester')
     eval1 = st.text_input('Number of evaluations to curricular units in the 1st semester')

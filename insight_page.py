@@ -16,23 +16,20 @@ df = load_data()
 
 def show_insight_page():
     st.title('Student Dropout Insight')
-
-
-
+    
     st.markdown("### **1. Bagaimana distribusi mahasiswa yang graduate dan dropout?**")
 
-    # Mengecek jumlah siswa yang dropout dan lulus 
+    target_counts = df['Target'].value_counts()
+
     plt.figure(figsize = (5,5))
-    ax = sns.countplot(data = df, x = 'Target')
 
-    # Untuk menampilkan nilai detail di atas bar
-    for i in ax.containers:
-        ax.bar_label(i,)
+    plt.pie(target_counts, labels=target_counts.index, autopct='%1.1f%%')
 
-    plt.title('Jumlah Siswa yang Dropout dan Lulus')
+    plt.title('Target Distribution')
+
     st.pyplot(plt)
 
-    st.caption('Tampak bahwa jumlah siswa yang lulus jauh lebih banyak daripada jumlah siswa yang dropout')
+    st.write('Tampak bahwa distribusinya masih cukup balance sehingga tidak perlu dilakukan penanganan khusus untuk mengatasi masalah imbalance data.')
 
 
 
@@ -48,17 +45,17 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan status perkawinan')
     st.pyplot(plt)
 
-    st.text('Keterangan:')
-    st.text('1 = Single')
-    st.text('2 = Married')
-    st.text('3 = Widower')
-    st.text('4 = Divorced')
-    st.text('5 = Facto Union')
-    st.text('6 = Legally Separated')
+    st.write('Keterangan:')
+    st.write('1 = Single')
+    st.write('2 = Married')
+    st.write('3 = Widower')
+    st.write('4 = Divorced')
+    st.write('5 = Facto Union')
+    st.write('6 = Legally Separated')
 
-    st.caption('Tampak bahwa ada perbedaan signifikan antara tingkat kelulusan mahasiswa yang belum menikah dibanding yang sudah menikah.')
-    st.caption('Jumlah mahasiswa single yang lulus sebesar hampir 2 kali lipat lebih banyak dibandingkan mahasiswa single yang dropout.')
-    st.caption('Sebaliknya jumlah mahasiswa sudah menikah justru lebih banyak yang dropout dibandingkan yang berhasil lulus')
+    st.write('Tampak bahwa ada perbedaan signifikan antara tingkat kelulusan mahasiswa yang belum menikah dibanding yang sudah menikah.')
+    st.write('Jumlah mahasiswa single yang lulus sebesar hampir 2 kali lipat lebih banyak dibandingkan mahasiswa single yang dropout.')
+    st.write('Sebaliknya jumlah mahasiswa sudah menikah justru lebih banyak yang dropout dibandingkan yang berhasil lulus')
 
 
 
@@ -74,11 +71,11 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan status beasiswa')
     st.pyplot(plt)
 
-    st.text('Keterangan:' )
-    st.text('0 = Tidak menggunakan beasiswa')
-    st.text('1 = Menggunakan beasiswa')
-    st.caption('Tampak jelas bahwa lebih dari 85% mahasiswa yang menggunakan beasiswa berhasil lulus')
-    st.caption('Sebaliknya, mahasiswa yang tidak menggunakan beasiswa memiliki jumlah yang hampir sama antara yang lulus dan tidak lulus.')
+    st.write('Keterangan:' )
+    st.write('0 = Tidak menggunakan beasiswa')
+    st.write('1 = Menggunakan beasiswa')
+    st.write('Tampak jelas bahwa lebih dari 85% mahasiswa yang menggunakan beasiswa berhasil lulus')
+    st.write('Sebaliknya, mahasiswa yang tidak menggunakan beasiswa memiliki jumlah yang hampir sama antara yang lulus dan tidak lulus.')
 
 
 
@@ -100,8 +97,8 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan umur')
     st.pyplot(plt)
 
-    st.caption('Ya, tampak bahwa umur berpengaruh terhadap tingkat kelulusan mahasiswa.')
-    st.caption('Terlihat bahwa semakin tua umur mahasiswa, maka semakin sedikit pula persentase mahasiswa yang lulus.')
+    st.write('Ya, tampak bahwa umur berpengaruh terhadap tingkat kelulusan mahasiswa.')
+    st.write('Terlihat bahwa semakin tua umur mahasiswa, maka semakin sedikit pula persentase mahasiswa yang lulus.')
 
 
 
@@ -118,15 +115,32 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan GDP')
     st.pyplot(plt)
 
-    st.caption('Tampak bahwa GDP tidak terlalu berpengaruh terhadap tingkat kelulusan mahasiswa.')
-    st.caption('Hal tersebut karena jumlah mahasiswa yang lulus dan tidak lulus pada setiap GDP hampir sama.')
-    st.caption('Namun, bila dicermati secara lebih detail, tampak bahwa GDP 1.79, 2.02, 3.51 memiliki persentase mahasiswa yang lulus lebih tinggi dibandingkan GDP yang lain')
+    st.write('Tampak bahwa GDP tidak terlalu berpengaruh terhadap tingkat kelulusan mahasiswa.')
+    st.write('Hal tersebut karena jumlah mahasiswa yang lulus dan tidak lulus pada setiap GDP hampir sama.')
+    st.write('Namun, bila dicermati secara lebih detail, tampak bahwa GDP 1.79, 2.02, 3.51 memiliki persentase mahasiswa yang lulus lebih tinggi dibandingkan GDP yang lain')
 
 
+    st.markdown('### **6. Apakah ada relasi antara jumlah SKS dengan nilai yang didapatkan di semester 1?**')
+    plt.figure(figsize=(10, 5))
+    ax = sns.lineplot(data=df, x='Curricular units 1st sem (approved)', y='Curricular units 1st sem (grade)')
+
+    plt.title('Approved vs Grade Curricular Units 1st Semester')
+    st.pyplot(plt)
+    st.write('Tampak ada perbedaan yang signifikan mengenai nilai yang didapatkan mahasiswa yang mengambil di bawah 5 sks dan di atas 5 sks.')
+    st.write('Mahasiswa yang mengambil di bawah 5 sks mendapatkan nilai yang jauh lebih jelek dibandingkan mahasiswa yang mengambil di atas 5 sks.')
+    st.write('Namun, tidak ada perbedaan signifikan mengenai nilai yang didapatkan mahasiswa yang mengambil antara 5-20 sks.')
+    st.write('Mahasiswa yang mengambil di atas 21 sks mendapatkan nilai yang lebih baik dibandingkan mahasiswa yang mengambil di bawah 20 sks.')
+
+    st.markdown('### **7. Apakah ada relasi antara jumlah SKS dengan nilai yang didapatkan di semester 2?**')
+    plt.figure(figsize=(10, 5))
+    ax = sns.lineplot(data=df, x='Curricular units 2nd sem (approved)', y='Curricular units 2nd sem (grade)')
+
+    plt.title('Approved vs Grade Curricular Units 2nd Semester')
+    st.pyplot(plt)
+    st.write('Tampak bahwa polanya masih sama seperti pada analisis semester 1 di atas.')
 
 
-
-    st.markdown('### **6. Bagaimana pengaruh jumlah SKS di semester 1 terhadap tingkat kelulusan mahasiswa?**')
+    st.markdown('### **8. Bagaimana pengaruh jumlah SKS di semester 1 terhadap tingkat kelulusan mahasiswa?**')
     # Melakukan binning untuk jumlah SKS
     bins = [0, 4, 8, 12, 16, 20, 24]
     labels = ['1-4', '5-8', '9-12', '13-16', '17-20', '21-24']
@@ -143,13 +157,13 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan jumlah SKS semester 1')
     st.pyplot(plt)
 
-    st.caption('Tampak bahwa mahasiswa yang mengambil 1-4 SKS memiliki persentase kelulusan yang sangat kecil.')
-    st.caption('Sebaliknya, mahasiswa yang mengambil di atas 5 sks memiliki persentase kelulusan yang lebih besar.')
+    st.write('Tampak bahwa mahasiswa yang mengambil 1-4 SKS memiliki persentase kelulusan yang sangat kecil.')
+    st.write('Sebaliknya, mahasiswa yang mengambil di atas 5 sks memiliki persentase kelulusan yang lebih besar.')
 
 
 
 
-    st.markdown('### **7. Bagaimana pengaruh jumlah SKS di semester 2 terhadap tingkat kelulusan mahasiswa?**')
+    st.markdown('### **9. Bagaimana pengaruh jumlah SKS di semester 2 terhadap tingkat kelulusan mahasiswa?**')
     # Melakukan binning untuk jumlah SKS
     bins = [0, 4, 8, 12, 16, 20]
     labels = ['1-4', '5-8', '9-12', '13-16', '17-20']
@@ -166,14 +180,14 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan jumlah SKS semester 2')
     st.pyplot(plt)
 
-    st.caption('Pola yang tampak masih sama seperti semester 1 di atas')
-    st.caption('Tampak bahwa mahasiswa yang mengambil 1-4 SKS memiliki persentase kelulusan yang sangat kecil.')
-    st.caption('Sebaliknya, mahasiswa yang mengambil di atas 5 sks memiliki persentase kelulusan yang lebih besar.')
+    st.write('Pola yang tampak masih sama seperti semester 1 di atas')
+    st.write('Tampak bahwa mahasiswa yang mengambil 1-4 SKS memiliki persentase kelulusan yang sangat kecil.')
+    st.write('Sebaliknya, mahasiswa yang mengambil di atas 5 sks memiliki persentase kelulusan yang lebih besar.')
 
 
 
 
-    st.markdown('### **8. Bagaimana persebaran IP mahasiswa di semester 1?**')
+    st.markdown('### **10. Bagaimana persebaran IP mahasiswa di semester 1?**')
 
     plt.figure(figsize=(9, 5))
 
@@ -185,13 +199,13 @@ def show_insight_page():
 
     st.pyplot(plt)
 
-    st.caption('Tampak bahwa persebaran IP mahasiswa di semester 1 ada di antara 10 - 16')
-    st.caption('Ada sekitar 600 mahasiswa yang mendapatkan IP 0')
-    st.caption('Hal tersebut mungkin terjadi jika mahasiswa tidak pernah mengikuti kelas pada mata kuliah yang sudah ia daftarkan.')
+    st.write('Tampak bahwa persebaran IP mahasiswa di semester 1 ada di antara 10 - 16')
+    st.write('Ada sekitar 600 mahasiswa yang mendapatkan IP 0')
+    st.write('Hal tersebut mungkin terjadi jika mahasiswa tidak pernah mengikuti kelas pada mata kuliah yang sudah ia daftarkan.')
 
 
 
-    st.markdown('### **9. Bagaimana pengaruh IP mahasiswa di semester 1 terhadap tingkat kelulusan mahasiswa?**')
+    st.markdown('### **11. Bagaimana pengaruh IP mahasiswa di semester 1 terhadap tingkat kelulusan mahasiswa?**')
     # Melakukan binning untuk nilai semester 1
     bins = [9.5, 10.25, 11, 11.75, 12.5, 13.25, 14, 14.75, 15.5, 16.25]
     labels = ['9.60-10.25', '10.26-11.00', '11.01-11.75', '11.76-12.50', '12.51-13.25', '13.26-14.00', '14.01-14.75', '14.76-15.50', '15.51-16.25']
@@ -208,14 +222,14 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan IP semester 1')
     st.pyplot(plt)
 
-    st.caption('Tampak jelas bahwa semakin tinggi IP, maka semakin besar pula persentase mahasiswa yang lulus.')
-    st.caption('Mahasiswa yang mendapatkan IP 9.6-10.25 memiliki persentase kelulusan yang sangat kecil.')
-    st.caption('Hal ini menunjukkan bahwa IP memang berpengaruh terhadap kelulusan mahasiswa.')
+    st.write('Tampak jelas bahwa semakin tinggi IP, maka semakin besar pula persentase mahasiswa yang lulus.')
+    st.write('Mahasiswa yang mendapatkan IP 9.6-10.25 memiliki persentase kelulusan yang sangat kecil.')
+    st.write('Hal ini menunjukkan bahwa IP memang berpengaruh terhadap kelulusan mahasiswa.')
 
     
 
 
-    st.markdown('### **10. Bagaimana persebaran IP mahasiswa di semester 2?**')
+    st.markdown('### **12. Bagaimana persebaran IP mahasiswa di semester 2?**')
 
     plt.figure(figsize=(9, 5))
 
@@ -227,13 +241,13 @@ def show_insight_page():
 
     st.pyplot(plt)
 
-    st.caption('Tampak bahwa persebaran IP mahasiswa di semester 2 ada di antara 10 - 17')
-    st.caption('Ada sekitar 800 mahasiswa yang mendapatkan IP 0')
-    st.caption('Distribusi ini masih mirip dengan distribusi IP pada semester 1.')
+    st.write('Tampak bahwa persebaran IP mahasiswa di semester 2 ada di antara 10 - 17')
+    st.write('Ada sekitar 800 mahasiswa yang mendapatkan IP 0')
+    st.write('Distribusi ini masih mirip dengan distribusi IP pada semester 1.')
 
     
     
-    st.markdown('### **11. Bagaimana pengaruh IP mahasiswa di semester 2 terhadap tingkat kelulusan mahasiswa?**')
+    st.markdown('### **13. Bagaimana pengaruh IP mahasiswa di semester 2 terhadap tingkat kelulusan mahasiswa?**')
     # Melakukan binning untuk nilai semester 2
     bins = [9.5, 10.25, 11, 11.75, 12.5, 13.25, 14, 14.75, 15.5, 16.25]
     labels = ['9.60 - 10.25', '10.26 - 11.00', '11.01 - 11.75', '11.76 - 12.50', '12.51 - 13.25', '13.26 - 14.00', '14.01 - 14.75', '14.76 - 15.50', '15.51 - 16.25']
@@ -250,4 +264,13 @@ def show_insight_page():
     plt.title('Kelulusan siswa berdasarkan IP semester 2')
     st.pyplot(plt)
 
-    st.caption('Sama seperti semester 1, tampak jelas bahwa semakin tinggi IP, maka semakin besar pula persentase mahasiswa yang lulus.')
+    st.write('Sama seperti semester 1, tampak jelas bahwa semakin tinggi IP, maka semakin besar pula persentase mahasiswa yang lulus.')
+
+
+    st.markdown('## **Kesimpulan**')
+    st.markdown('**Karakteristik Mahasiswa yang Lulus:**')
+    st.write('1. Mahasiswa yang masih single')
+    st.write('2. Penerima beasiswa')
+    st.write('3. Memiliki umur di bawah 30 tahun')
+    st.write('4. Mengambil lebih dari 5 sks')
+    st.write('5. Memiliki IP di atas 12.50')
