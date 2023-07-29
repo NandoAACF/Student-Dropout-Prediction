@@ -5,6 +5,7 @@
 - Modeling from **scratch** without ML Library
 - Data Augmentation using GAN
 - Feature Selection using ANOVA
+- Visualize insights from data
 - Deploy the best model into Web App
 
 **Model from scratch:**
